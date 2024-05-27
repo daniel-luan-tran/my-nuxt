@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "title": "Blog 1",
+    "createdDate": "2024-05-24",
+    "summary": "Summary of blog 1",
+    "link": "/blog"
+  },
+  {
+    "id": 2,
+    "title": "Blog 2",
+    "createdDate": "2024-05-24",
+    "summary": "Summary of blog 2",
+    "link": "/blog"
+  },
+  {
+    "id": 3,
+    "title": "Blog 3",
+    "createdDate": "2024-05-24",
+    "summary": "Summary of blog 3",
+    "link": "/blog"
+  }
+]

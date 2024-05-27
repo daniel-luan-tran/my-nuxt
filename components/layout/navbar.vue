@@ -7,7 +7,7 @@
 			<v-img aspect-ratio="1/1" :height="70" :width="70" src="/assets/images/icon-green.svg"></v-img>
 		</NuxtLink>
 		<v-toolbar-title link to="/">
-			<h1>Testing</h1>
+			<h3>Nuxt - Typescript</h3>
 		</v-toolbar-title>
 		<v-spacer></v-spacer>
 		<v-toolbar-items class="hidden-xs">
@@ -21,24 +21,11 @@
 		<v-list>
 			<v-list-item title="My Nuxt 3" subtitle="Vuetify"></v-list-item>
 			<v-divider></v-divider>
-
-			<v-list-item link to="/">
+			<v-list-item v-for="item in menuItems" link :key="item.title" :to="item.path">
 				<template v-slot:prepend>
-					<v-icon icon="mdi-home"></v-icon>
+					<v-icon :icon="item.icon" />
 				</template>
-				<v-list-item-title>Home</v-list-item-title>
-			</v-list-item>
-			<v-list-item link to="/page-2">
-				<template v-slot:prepend>
-					<v-icon icon="mdi-book"></v-icon>
-				</template>
-				<v-list-item-title>Page 2</v-list-item-title>
-			</v-list-item>
-			<v-list-item link to="/page-3">
-				<template v-slot:prepend>
-					<v-icon icon="mdi-flag"></v-icon>
-				</template>
-				<v-list-item-title>Page 3</v-list-item-title>
+				<v-list-item-title>{{ item.title }}</v-list-item-title>
 			</v-list-item>
 		</v-list>
 	</v-navigation-drawer>
@@ -65,6 +52,11 @@ const data = [
 		title: 'Page 3',
 		path: '/page-3',
 		icon: 'mdi-flag',
+	},
+	{
+		title: 'Blog',
+		path: '/blog',
+		icon: 'mdi-post',
 	},
 ] as MenuItem[];
 
