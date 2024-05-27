@@ -1,7 +1,7 @@
 <template>
   <div>
-    <v-btn @click="increment">Increment</v-btn>
     <v-btn @click="decrement">Decrement</v-btn>
+    <v-btn @click="increment">Increment</v-btn>
   </div>
 </template>
 

@@ -1,3 +1,5 @@
+import type { CounterState } from "~/types";
+
 export default {
   increment: (state: CounterState) => {
     state.count++;
