@@ -15,5 +15,6 @@
 </template>
 
 <script setup lang="ts">
-const blogList = await $fetch('/api/blog-list');
+// const blogList = await $fetch('/api/blog-list');
+const blogList = await $fetch('/api/dynamodb-blog-test');
 </script>
