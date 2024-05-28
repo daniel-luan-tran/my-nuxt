@@ -1,5 +1,5 @@
 <template>
-  <v-data-table :items="blogList">
+  <v-data-table :items="filteredBlogList">
     <template v-slot:header.id="{ column }">
       {{ column.title?.toUpperCase() }}
     </template>
@@ -15,6 +15,6 @@
 </template>
 
 <script setup lang="ts">
-// const blogList = await $fetch('/api/blog-list');
-const blogList = await $fetch('/api/dynamodb-blog-test');
+const { data: blogList } = await useFetch('/api/blog-list');
+const filteredBlogList = computed(() => blogList.value ?? []);
 </script>
