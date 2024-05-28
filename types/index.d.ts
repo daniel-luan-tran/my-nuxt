@@ -11,7 +11,7 @@ export interface CounterState {
 export interface Blog {
 	id: string;
 	title: string;
-	createdDate: string;
 	summary: string;
+	createdDate: string;
 	link: string;
 }

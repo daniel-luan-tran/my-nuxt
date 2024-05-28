@@ -18,31 +18,9 @@ async function parseBody(req: IncomingMessage): Promise<any> {
   });
 }
 
-export default defineEventHandler(async (event) => {
-  const method = event.node.req.method;
-  const res = event.node.res;
-  const req = event.node.req
-
-  if (method === 'GET') {
-    // Handle GET request
-    return await handleGetRequest(event);
-  } else if (method === 'POST') {
-    // Handle POST request
-    return await handlePostRequest(event, res, req);
-  } else if (method === 'PUT') {
-    // Handle PUT request
-    return await handlePutRequest(event, res, req);
-  } else if (method === 'DELETE') {
-    // Handle DELETE request
-    return await handleDeleteRequest(event, res, req);
-  } else {
-    return { status: 405, message: 'Method Not Allowed' };
-  }
-});
-
-async function handleGetRequest(event: any) {
+export async function handleGetRequest(event: any, tableName: string) {
   const params = {
-    TableName: 'blog',
+    TableName: tableName,
   };
 
   try {
@@ -54,11 +32,11 @@ async function handleGetRequest(event: any) {
   }
 }
 
-async function handlePostRequest(event: any, res: ServerResponse<IncomingMessage>, req: IncomingMessage) {
+export async function handlePostRequest(event: any, res: ServerResponse<IncomingMessage>, req: IncomingMessage, tableName: string) {
   const body = await parseBody(req);
 
   const params = {
-    TableName: 'blog',
+    TableName: tableName,
     Item: body,
   };
 
@@ -70,11 +48,11 @@ async function handlePostRequest(event: any, res: ServerResponse<IncomingMessage
   }
 }
 
-async function handlePutRequest(event: any, res: ServerResponse<IncomingMessage>, req: IncomingMessage) {
+export async function handlePutRequest(event: any, res: ServerResponse<IncomingMessage>, req: IncomingMessage, tableName: string) {
   const body = await parseBody(req);
 
   const params = {
-    TableName: 'blog',
+    TableName: tableName,
     Key: {
       // Your key attributes
     },
@@ -95,17 +73,21 @@ async function handlePutRequest(event: any, res: ServerResponse<IncomingMessage>
   }
 }
 
-async function handleDeleteRequest(event: any, res: ServerResponse<IncomingMessage>, req: IncomingMessage) {
+export async function handleDeleteRequest(event: any, res: ServerResponse<IncomingMessage>, req: IncomingMessage, tableName: string) {
+  const body = await parseBody(req);
+
   const params = {
-    TableName: 'blog',
+    TableName: tableName,
     Key: {
-      // Your key attributes
+      id: body.id,
     },
   };
 
   try {
     await dynamoDb.delete(params).promise();
-    return { status: 200, message: 'Item deleted successfully' };
+    const data = await dynamoDb.scan(params).promise();
+    const blogList = data.Items as Blog[];
+    return blogList;
   } catch (error: any) {
     return { status: 500, error: error.message };
   }
