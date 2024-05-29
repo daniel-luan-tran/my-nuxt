@@ -4,12 +4,15 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
+    "build:prod": "nuxt build --configuration=production",
+    "build:dev": "nuxt build --configuration=development",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.584.0",
     "@mdi/font": "^7.4.47",
     "@pinia/nuxt": "^0.5.1",
     "aws-sdk": "^2.1628.0",

@@ -1,4 +1,4 @@
-import dynamoDb from '../utils/aws';
+import { dynamoDb } from '../utils/aws';
 import type { Blog } from '~/types';
 import { ServerResponse, IncomingMessage } from 'http';
 
